@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: test-module
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+      config:
+        server-addr: 127.0.0.1:8848
+        namespace: 639c6197-2003-44d7-9c2c-077543189142
+
+server:
+  port: 18102

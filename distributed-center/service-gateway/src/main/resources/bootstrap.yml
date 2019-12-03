@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: service-gateway
+  cloud:
+    nacos:
+      config:
+        server-addr: 127.0.0.1:8848
+      discovery:
+        server-addr: 127.0.0.1:8848
+    gateway:
+      discovery:
+        locator:
+          # 开启服务注册和发现的功能,并且spring cloud gateway自动根据服务发现为每一个服务创建了一个router,这个router将以服务名开头的请求路径转发到对应的服务
+          enabled: true
+          # 将请求路径上的服务名配置为小写, 比如以/test-module/*的请求路径被路由转发到服务名为test-module的服务上
+          lower-case-service-id: true
+          filters:
+            - StripPrefix=1
+
+server:
+  port: 8020
