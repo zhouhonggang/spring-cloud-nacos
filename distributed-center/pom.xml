@@ -16,6 +16,7 @@
     <modules>
         <module>service-admin</module>
         <module>service-gateway</module>
+        <module>security-oauth2</module>
     </modules>
 
     <dependencies>

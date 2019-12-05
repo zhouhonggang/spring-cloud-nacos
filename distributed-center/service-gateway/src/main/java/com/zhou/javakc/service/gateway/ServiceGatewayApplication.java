@@ -20,16 +20,18 @@ import reactor.core.publisher.Mono;
  */
 @SpringBootApplication
 @EnableDiscoveryClient
-@RestController
 public class ServiceGatewayApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(ServiceGatewayApplication.class, args);
     }
 
-    @GetMapping("/fallback")
-    public Mono<String> fallback() {
-        return Mono.just("非常抱歉, 服务器开了点小差!");
+    @RestController
+    class FallbackController {
+        @GetMapping("/fallback")
+        public Mono<String> fallback() {
+            return Mono.just("非常抱歉, 服务器开了点小差!");
+        }
     }
 
     @Bean

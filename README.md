@@ -6,6 +6,7 @@
 
 ## 项目构成
     spring-cloud-nacos
+        │
         ├── distributed-center
         │   ├── service-admin 微服务性能监控
         │   └── service-gateway 微服务网关分发
