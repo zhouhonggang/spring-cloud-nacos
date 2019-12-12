@@ -39,16 +39,22 @@ public class ServiceGatewayApplication {
         return builder.routes()
                 // 配置路由,把/test-module/下的请求路由到test-module微服务中
                 .route(p -> p
-                        .path("/test-module/**")
-                        .filters(f -> f
-                                // 对path()指定的请求使用熔断器
-                                .hystrix(config -> config
-                                        // 熔断器的名字
-                                        .setName("default")
-                                        // 熔断到 /fallback 指向 fallback()
-                                        .setFallbackUri("forward:/fallback")))
-                        // lb开头是注册中心中的服务, http开头是域名地址
-                        .uri("lb://test-module"))
+                    .path("/test-module/**")
+                    .filters(f -> f
+                            // 对path()指定的请求使用熔断器
+                            .hystrix(config -> config
+                                    // 熔断器的名字
+                                    .setName("default")
+                                    // 熔断到 /fallback 指向 fallback()
+                                    .setFallbackUri("forward:/fallback")))
+                    // lb开头是注册中心中的服务, http开头是域名地址
+                    .uri("lb://test-module"))
+                .route(p -> p
+                    .path("/oauth/token")
+                    .uri("lb://security-oauth2"))
+                .route(p -> p
+                    .path("/163")
+                    .uri("https://news.163.com"))
                 .build();
     }
 
