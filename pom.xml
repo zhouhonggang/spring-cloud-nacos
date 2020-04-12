@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.2.5.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+    <groupId>com.zhou.javakc</groupId>
+    <artifactId>spring-cloud-nacos</artifactId>
+    <version>0.2.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>spring-cloud-nacos</name>
+    <description>基于Alibaba Nacos构建云原生应用的动态服务发现、配置管理和服务管理平台!</description>
+
+    <modules>
+        <module>management-center</module>
+        <module>microservice-center</module>
+        <module>common-components</module>
+    </modules>
+
+    <properties>
+        <java.version>1.8</java.version>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!--  版本定义  -->
+        <nacos.version>1.1.4</nacos.version>
+        <spring.cloud.version>Hoxton.SR2</spring.cloud.version>
+        <spring.cloud.alibaba.version>0.9.0.RELEASE</spring.cloud.alibaba.version>
+        <!--  组件定义  -->
+        <common.entity.version>0.2.1-SNAPSHOT</common.entity.version>
+        <common.jpa.version>0.2.1-SNAPSHOT</common.jpa.version>
+    </properties>
+
+    <!--配置全局依赖-->
+    <dependencies>
+        <!--Spring Boot微服务进行健康监控-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <!--Spring Boot应用支持热部署-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <optional>true</optional>
+            <scope>runtime</scope>
+        </dependency>
+        <!--Spring Boot单元测试支持-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <!--提供modules依赖-->
+    <dependencyManagement>
+        <dependencies>
+            <!--管理spring-cloud版本依赖-->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring.cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!--管理spring-cloud-alibaba版本依赖-->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${spring.cloud.alibaba.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.zhou.javakc</groupId>
+                <artifactId>common-entity</artifactId>
+                <version>${common.entity.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.zhou.javakc</groupId>
+                <artifactId>common-jpa</artifactId>
+                <version>${common.jpa.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <plugins>
+            <!--将spring-boot应用打包-->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <!--配置maven编译的编码格式-->
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
