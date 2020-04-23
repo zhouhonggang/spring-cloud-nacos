@@ -18,7 +18,7 @@ spring:
             - StripPrefix=1
 
 nacos:
-  address: 127.0.0.1:8848
+  address: 127.0.0.1:8000
   data-id: gateway-forwarding-refresh
   group: DEFAULT_GROUP
   timeout: 5000
