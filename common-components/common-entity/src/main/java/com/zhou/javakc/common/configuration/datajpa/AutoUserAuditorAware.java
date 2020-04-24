@@ -1,4 +1,4 @@
-package com.zhou.javakc.common.configuration;
+package com.zhou.javakc.common.configuration.datajpa;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.AuditorAware;

@@ -35,6 +35,7 @@
         <nacos.version>1.1.4</nacos.version>
         <spring.cloud.version>Hoxton.SR2</spring.cloud.version>
         <spring.cloud.alibaba.version>0.9.0.RELEASE</spring.cloud.alibaba.version>
+        <swagger2.version>2.9.2</swagger2.version>
         <!--  组件定义  -->
         <common.entity.version>0.2.1-SNAPSHOT</common.entity.version>
         <common.jpa.version>0.2.1-SNAPSHOT</common.jpa.version>
@@ -81,7 +82,18 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-
+            <!--swagger2文档管理依赖-->
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>${swagger2.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger-ui</artifactId>
+                <version>${swagger2.version}</version>
+            </dependency>
+            <!--自定义公共组件依赖引入-->
             <dependency>
                 <groupId>com.zhou.javakc</groupId>
                 <artifactId>common-entity</artifactId>

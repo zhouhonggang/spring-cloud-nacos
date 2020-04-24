@@ -39,6 +39,17 @@
             <artifactId>validation-api</artifactId>
             <scope>provided</scope>
         </dependency>
+        <!--swagger2文档-->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
     <build>

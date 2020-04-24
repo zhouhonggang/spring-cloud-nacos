@@ -1,6 +1,15 @@
 spring:
   application:
     name: gateway-forwarding
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
   cloud:
     nacos:
       config:
@@ -10,12 +19,19 @@ spring:
     gateway:
       discovery:
         locator:
-          # 开启服务注册和发现的功能,并且spring cloud gateway自动根据服务发现为每一个服务创建了一个router,这个router将以服务名开头的请求路径转发到对应的服务
+          # spring cloud gateway根据服务发现为每一个服务创建了一个router,router将请求路径转发到对应的服务
           enabled: true
-          # 将请求路径上的服务名配置为小写, 比如以/test-module/*的请求路径被路由转发到服务名为test-module的服务上
+          # 将请求路径上的服务名配置为小写, 比如以/system-user/*的请求路径被路由转发到服务名为system-user的服务上
           lower-case-service-id: true
-          filters:
-            - StripPrefix=1
+      routes:
+      # 配置系统管理-用户管理-路由转发
+      - id: system-user
+        uri: lb://system-user
+        predicates:
+        - Path=/system-user/**
+        filters:
+        - SwaggerHeaderFilter
+        - StripPrefix=1
 
 nacos:
   address: 127.0.0.1:8000
