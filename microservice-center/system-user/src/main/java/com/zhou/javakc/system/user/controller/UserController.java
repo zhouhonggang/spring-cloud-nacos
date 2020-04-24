@@ -2,6 +2,10 @@ package com.zhou.javakc.system.user.controller;
 
 import com.zhou.javakc.common.entity.system.user.User;
 import com.zhou.javakc.system.user.service.UserService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.util.ResourceUtils;
@@ -10,7 +14,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.io.File;
-import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -23,24 +26,34 @@ import java.util.UUID;
  * @copyright Copyright (c) 2019, www.javakc.com All Rights Reserved.
  */
 @RestController
-@RequestMapping("system/user")
+@Api(tags = "系统管理-人员管理-API接口")
 public class UserController {
 
     @Autowired
     private UserService userService;
 
-    @GetMapping
-    public String query()
+    @PostMapping
+    @ApiOperation(value = "用户注册", notes = "请按照校验规则添加必填内容及相应格式!")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name="username", value="登录账号", required=true),
+            @ApiImplicitParam(name="password", value="登陆密码", required=true),
+            @ApiImplicitParam(name="nickname", value="用户昵称", required=true),
+            @ApiImplicitParam(name="phone", value="手机号码", required=true),
+            @ApiImplicitParam(name="email", value="邮箱地址", required=true)
+    })
+    public User create(@RequestBody User entity)
     {
-        return "系统管理-用户模块-查询功能";
+        return userService.save(entity);
     }
 
+    @ApiOperation(value = "用户查询", notes = "根据动态查询条件分页查询!")
     @PostMapping("query")
     public Page<User> query(@RequestBody User entity)
     {
         return userService.findAll(entity);
     }
 
+    @ApiOperation(value = "头像上传", notes = "用户注册页面, 涉及到用户头像上传的API!")
     @PostMapping("photo")
     public String photo(@RequestParam("photo") MultipartFile photo)
     {
@@ -55,24 +68,21 @@ public class UserController {
         return name;
     }
 
-    @PostMapping
-    public void create(@RequestBody @Valid User entity)
+    @ApiOperation(value = "用户修改", notes = "请按照校验规则添加必填内容及相应格式!")
+    @PutMapping
+    public User update(@RequestBody User entity)
     {
-        userService.save(entity);
+        return userService.update(entity);
     }
 
+    @ApiOperation(value = "用户主键查询", notes = "根据用户主键ID查询用户基本信息!")
     @GetMapping("{id}")
     public Map<String, Object> load(@PathVariable String id)
     {
         return userService.queryById(id);
     }
 
-    @PutMapping
-    public void update(@RequestBody User entity)
-    {
-        userService.update(entity);
-    }
-
+    @ApiOperation(value = "用户删除", notes = "根据用户主键ID删除用户基本信息!")
     @DeleteMapping("{id}")
     public void delete(@PathVariable String id)
     {
