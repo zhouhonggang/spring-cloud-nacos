@@ -2,6 +2,7 @@ package com.zhou.javakc.common.entity.system.user;
 
 import com.zhou.javakc.common.entity.base.Base;
 import com.zhou.javakc.common.entity.system.role.Role;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -25,40 +26,41 @@ import java.util.List;
 @Table(name = "system_user")
 //@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class User extends Base {
+
     /** 登陆账号 */
-//    @NotBlank(message = "账号不能为空")
-//    @Size(min = 3, max = 16, message = "账号的长度不能低于{min}且不能高于{max}")
     @Column(name = "user_name", updatable = false)
+    @ApiModelProperty(value = "登陆名称 | Record user username")
     private String username;
 
     /** 登陆密码 */
-//    @NotBlank(message = "密码不能为空")
-//    @Size(min = 6, max = 16, message = "密码的长度不能低于{min}且不能高于{max}")
     @Column(name = "pass_word", updatable = false)
+    @ApiModelProperty(value = "登陆密码 | Record user password")
     private String password;
 
     /** 用户昵称 */
-    @NotBlank(message = "昵称不能为空")
     @Column(name = "nick_name")
+    @ApiModelProperty(value = "用户昵称 | Record user nickname")
     private String nickname;
 
     /** 手机号码 */
-    @Pattern(regexp = "^[1][3,4,5,7,8][0-9]{9}$", message = "请输入正确的手机号码")
-    @Column(name = "phone")
+    @Column(name = "user_phone")
+    @ApiModelProperty(value = "手机号码 | Record user phone")
     private String phone;
 
     /** 电子邮箱 */
-    @Email(message = "请输入正确的邮箱格式")
-    @Column(name = "email")
+    @Column(name = "user_email")
+    @ApiModelProperty(value = "邮箱地址 | Record user email")
     private String email;
 
     /** 用户头像 */
     @Lob
     @Column(name = "user_photo", updatable = false)
+    @ApiModelProperty(value = "用户头像 | Record user photo")
     private byte[] photo;
 
     /** 头像临时传输 */
     @Transient
+    @ApiModelProperty(value = "用户头像(缓存地址) | Record user photo name")
     private String photoname;
 
     @ManyToMany
@@ -67,5 +69,7 @@ public class User extends Base {
         joinColumns = @JoinColumn(name = "user_id"),
         inverseJoinColumns = @JoinColumn(name = "role_id")
     )
+    @ApiModelProperty(value = "角色集合 | Record user role list")
     private List<Role> roles;
+
 }

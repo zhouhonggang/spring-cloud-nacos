@@ -1,11 +1,14 @@
 package com.zhou.javakc.system.role.controller;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.zhou.javakc.common.entity.system.role.Role;
 import com.zhou.javakc.system.role.service.RoleService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 /**
  * 系统管理-角色管理-表现层(system-role)
@@ -38,9 +41,9 @@ public class RoleController {
 
     @ApiOperation(value = "角色添加", notes = "注册角色基本信息!")
     @PostMapping
-    public void save(Role entity)
+    public void save(@RequestBody Role entity)
     {
-        roleService.save(entity);
+        System.out.println("entity:"+entity);
     }
 
     @ApiOperation(value = "角色修改", notes = "修改角色基本信息!")

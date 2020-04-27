@@ -40,7 +40,6 @@ public class ResponseDataAdvice implements ResponseBodyAdvice {
     @Nullable
     public Object beforeBodyWrite(@Nullable Object o, MethodParameter methodParameter, MediaType mediaType,
                                   Class aClass, ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse) {
-        System.out.println(" o:"+o );
         // 如果出现异常, 则按照异常内容返回
         if(exceptionState)
         {
