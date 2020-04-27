@@ -1,12 +1,11 @@
 package com.zhou.javakc.system.role.controller;
 
 import com.zhou.javakc.common.entity.system.role.Role;
+import com.zhou.javakc.system.role.service.RoleService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * 系统管理-角色管理-表现层(system-role)
@@ -20,26 +19,35 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(tags = "系统管理-角色管理-API接口")
 public class RoleController {
 
+    @Autowired
+    private RoleService roleService;
+
     @ApiOperation(value = "角色获取", notes = "根据角色主键ID获取角色基本信息!")
     @GetMapping("{id}")
     public Role load(@PathVariable String id)
     {
-        System.out.println("根据ID获取");
-
-        Role role = new Role();
-        role.setId("roleId001");
-        role.setRolename("角色名称002");
-        role.setRolecode("角色编号003");
-        role.setSummary("summary004");
-        return role;
+        return roleService.queryById(id);
     }
 
     @ApiOperation(value = "角色删除", notes = "根据角色主键ID删除角色基本信息!")
     @DeleteMapping("{id}")
     public void delete(@PathVariable String id)
     {
-        System.out.println("根据ID删除");
-        throw new NullPointerException();
+        roleService.delete(id);
+    }
+
+    @ApiOperation(value = "角色添加", notes = "注册角色基本信息!")
+    @PostMapping
+    public void save(Role entity)
+    {
+        roleService.save(entity);
+    }
+
+    @ApiOperation(value = "角色修改", notes = "修改角色基本信息!")
+    @PutMapping
+    public void update(Role entity)
+    {
+        roleService.save(entity);
     }
 
 }

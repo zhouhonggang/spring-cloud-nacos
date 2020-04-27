@@ -1,4 +1,4 @@
-package com.zhou.javakc.common.configuration.restful.success;
+package com.zhou.javakc.common.configuration.restful;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

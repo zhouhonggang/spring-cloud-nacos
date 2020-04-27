@@ -61,15 +61,12 @@ public class CustomResponseBodyFilter extends AbstractGatewayFilterFactory<Objec
 //                //如果出现乱码, 通过此方案解决
 //                exchange.getResponse().getHeaders().set("Content-Type","application/json;charset=UTF-8");
                 //获取response的 返回数据
-                ServerHttpResponse originalResponse = exchange.getResponse();
-                DataBufferFactory bufferFactory = originalResponse.bufferFactory();
-                HttpStatus statusCode = originalResponse.getStatusCode();
-
-                System.out.println( statusCode );
-                System.out.println( statusCode == HttpStatus.OK );
+                ServerHttpResponse serverHttpResponse = exchange.getResponse();
+                DataBufferFactory bufferFactory = serverHttpResponse.bufferFactory();
+                HttpStatus statusCode = serverHttpResponse.getStatusCode();
 
                 if (statusCode == HttpStatus.OK) {
-                    ServerHttpResponseDecorator decoratedResponse = new ServerHttpResponseDecorator(originalResponse) {
+                    ServerHttpResponseDecorator decoratedResponse = new ServerHttpResponseDecorator(serverHttpResponse) {
                         @Override
                         public Mono<Void> writeWith(Publisher<? extends DataBuffer> body) {
                             // 判断服务返回的数据类型进行拦截，根据自己的业务进行修改
@@ -86,11 +83,10 @@ public class CustomResponseBodyFilter extends AbstractGatewayFilterFactory<Objec
                                     responseData = responseData.replaceAll(":null", ":\"\"");
 
                                     byte[] uppedContent = responseData.getBytes(Charsets.UTF_8);
-                                    //return bufferFactory.wrap(uppedContent);
 
                                     //响应结果集封装到实体对象中
-                                    String rs = new String(uppedContent, Charset.forName("UTF-8"));
-                                    return bufferFactory.wrap(JSON.toJSONBytes(new ResponseResult(statusCode.value(), statusCode.name(), JSON.parseObject(rs))));
+                                    String result = new String(uppedContent, Charset.forName("UTF-8"));
+                                    return bufferFactory.wrap(JSON.toJSONBytes(ResponseResult.success(statusCode.value(), statusCode.name(), JSON.parseObject(result))));
                                 }));
                             } else {
                                 return chain.filter(exchange);
@@ -101,7 +97,6 @@ public class CustomResponseBodyFilter extends AbstractGatewayFilterFactory<Objec
                 }
                 return chain.filter(exchange);
             } catch (Exception e) {
-                log.error(" ReplaceNullFilter 异常", e);
                 return chain.filter(exchange);
             }
         }
