@@ -16,6 +16,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>system-user</module>
+        <module>system-role</module>
     </modules>
 
     <dependencies>
@@ -33,6 +34,20 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+        </dependency>
+        <!--spring-data-jpa封装-->
+        <dependency>
+            <groupId>com.zhou.javakc</groupId>
+            <artifactId>common-jpa</artifactId>
+        </dependency>
+        <!--swagger2文档-->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
         </dependency>
     </dependencies>
 

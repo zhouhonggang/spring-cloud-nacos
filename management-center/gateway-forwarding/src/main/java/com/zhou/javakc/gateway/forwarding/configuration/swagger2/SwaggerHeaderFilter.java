@@ -16,7 +16,7 @@ import org.springframework.web.server.ServerWebExchange;
  * @copyright Copyright (c) 2019, www.javakc.com All Rights Reserved.
  */
 @Component
-public class SwaggerHeaderFilter extends AbstractGatewayFilterFactory {
+public class SwaggerHeaderFilter extends AbstractGatewayFilterFactory<Object> {
 
     private static final String HEADER_NAME = "X-Forwarded-Prefix";
 

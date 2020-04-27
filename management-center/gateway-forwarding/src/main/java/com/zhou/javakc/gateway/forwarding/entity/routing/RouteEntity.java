@@ -1,4 +1,4 @@
-package com.zhou.javakc.gateway.forwarding.entity;
+package com.zhou.javakc.gateway.forwarding.entity.routing;
 
 import lombok.Data;
 

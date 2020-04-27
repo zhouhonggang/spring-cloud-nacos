@@ -1,4 +1,4 @@
-package com.zhou.javakc.gateway.forwarding.entity;
+package com.zhou.javakc.gateway.forwarding.entity.routing;
 
 import lombok.Data;
 
@@ -14,9 +14,9 @@ import java.util.Map;
  * @copyright Copyright (c) 2019, www.javakc.com All Rights Reserved.
  */
 @Data
-public class FilterEntity {
-    //路由名称
+public class PredicateEntity {
+    //断言名称
     private String name;
-    //路由规则
+    //断言规则
     private Map<String, String> args = new LinkedHashMap<>();
 }

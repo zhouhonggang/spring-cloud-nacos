@@ -1,4 +1,4 @@
-package com.zhou.javakc.common.configuration.restful;
+package com.zhou.javakc.common.configuration.restful.success;
 
 import lombok.Data;
 
@@ -23,24 +23,31 @@ public class ResponseResult<T> {
      * 错误码，给出明确错误码，更好的应对业务异常；
      * 请求成功该值可为空
      */
-    private String errorCode = "";
+    private int code;
 
     /**
      * 错误消息，与错误码相对应，更具体的描述异常信息
      */
-    private String errorMessage = "";
+    private String message = "";
 
     /**
      * 返回结果，通常是 Bean 对象对应的 JSON 数据；
      * 通常为了应对不同返回值类型，将其声明为泛型类型
      */
-    private T resultBody;
+    private T data;
 
     public ResponseResult() {
     }
 
-    public ResponseResult(T resultBody) {
-        this.resultBody = resultBody;
+    public ResponseResult(T data) {
+        this.data = data;
+    }
+
+    public ResponseResult(int status, int code, String message, T data) {
+        this.status = status;
+        this.code = code;
+        this.message = message;
+        this.data = data;
     }
 
 }

@@ -1,4 +1,4 @@
-package com.zhou.javakc.gateway.forwarding.configuration;
+package com.zhou.javakc.gateway.forwarding.configuration.domain;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

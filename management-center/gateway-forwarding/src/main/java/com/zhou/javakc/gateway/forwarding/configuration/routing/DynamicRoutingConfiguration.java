@@ -1,4 +1,4 @@
-package com.zhou.javakc.gateway.forwarding.configuration;
+package com.zhou.javakc.gateway.forwarding.configuration.routing;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -7,9 +7,9 @@ import com.alibaba.nacos.api.PropertyKeyConst;
 import com.alibaba.nacos.api.config.ConfigService;
 import com.alibaba.nacos.api.config.listener.Listener;
 import com.alibaba.nacos.api.exception.NacosException;
-import com.zhou.javakc.gateway.forwarding.entity.FilterEntity;
-import com.zhou.javakc.gateway.forwarding.entity.PredicateEntity;
-import com.zhou.javakc.gateway.forwarding.entity.RouteEntity;
+import com.zhou.javakc.gateway.forwarding.entity.routing.FilterEntity;
+import com.zhou.javakc.gateway.forwarding.entity.routing.PredicateEntity;
+import com.zhou.javakc.gateway.forwarding.entity.routing.RouteEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +33,7 @@ import java.util.Properties;
 import java.util.concurrent.Executor;
 
 /**
- * 动态网关((Spring Cloud GateWay)
+ * 动态网关(Spring Cloud GateWay)
  * @project spring-cloud-nacos
  * @author zhou
  * @version v1.0.0

@@ -32,7 +32,14 @@ spring:
         filters:
         - SwaggerHeaderFilter
         - StripPrefix=1
-
+      # 配置系统管理-角色管理-路由转发
+      - id: system-role
+        uri: lb://system-role
+        predicates:
+        - Path=/system-role/**
+        filters:
+        - SwaggerHeaderFilter
+        - StripPrefix=1
 nacos:
   address: 127.0.0.1:8000
   data-id: gateway-forwarding-refresh
