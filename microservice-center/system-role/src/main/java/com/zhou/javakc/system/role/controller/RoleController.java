@@ -8,6 +8,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -25,6 +26,14 @@ public class RoleController {
     @Autowired
     private RoleService roleService;
 
+
+    @ApiOperation(value = "角色全部获取", notes = "获取全部角色基本信息!")
+    @GetMapping
+    public List<Role> load()
+    {
+        return roleService.queryAll();
+    }
+
     @ApiOperation(value = "角色获取", notes = "根据角色主键ID获取角色基本信息!")
     @GetMapping("{id}")
     public Role load(@PathVariable String id)
@@ -32,18 +41,18 @@ public class RoleController {
         return roleService.queryById(id);
     }
 
-    @ApiOperation(value = "角色删除", notes = "根据角色主键ID删除角色基本信息!")
-    @DeleteMapping("{id}")
-    public void delete(@PathVariable String id)
-    {
-        roleService.delete(id);
-    }
-
     @ApiOperation(value = "角色添加", notes = "注册角色基本信息!")
     @PostMapping
     public void save(@RequestBody Role entity)
     {
         System.out.println("entity:"+entity);
+    }
+
+    @ApiOperation(value = "角色删除", notes = "根据角色主键ID删除角色基本信息!")
+    @DeleteMapping("{id}")
+    public void delete(@PathVariable String id)
+    {
+        roleService.delete(id);
     }
 
     @ApiOperation(value = "角色修改", notes = "修改角色基本信息!")

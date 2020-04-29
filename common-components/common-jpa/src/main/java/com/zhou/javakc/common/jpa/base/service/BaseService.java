@@ -73,4 +73,14 @@ public abstract class BaseService<T extends Base, D extends BaseDao>{
         return (T)dao.findById(id).get();
     }
 
+    /**
+     * 查询所有的数据
+     * @return 全部数据
+     */
+    @Deprecated
+    public List<T> queryAll()
+    {
+        return dao.findAll();
+    }
+
 }

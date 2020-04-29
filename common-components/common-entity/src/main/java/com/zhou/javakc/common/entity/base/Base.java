@@ -76,16 +76,14 @@ public class Base implements Serializable, Cloneable {
     @ApiModelProperty(value = "版本戳 | Record revision")
     private Integer revision = 0;
 
-    /** ------------------------------分页查询条件------------------------------ */
-
     /** 封装 分页 页码 */
-//    @JsonIgnore
     @Transient
+    @ApiModelProperty(value = "jpa分页开始页码(从0开始) | Record offset")
     public int offset;
 
     /** 封装 分页 条数 */
-//    @JsonIgnore
     @Transient
+    @ApiModelProperty(value = "jpa分页每页展示条数(默认10条) | Record limit")
     public int limit = 10;
 
 }

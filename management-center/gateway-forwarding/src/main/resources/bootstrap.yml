@@ -40,8 +40,11 @@ spring:
         filters:
         - SwaggerHeaderFilter
         - StripPrefix=1
-#      default-filters:
-#      - CustomResponseBodyFilter
+      # 配置安全认证-路由转发
+      - id: security-oauth2
+        uri: lb://security-oauth2
+        predicates:
+          - Path=/oauth/token/**
 nacos:
   address: 127.0.0.1:8000
   data-id: gateway-forwarding-refresh

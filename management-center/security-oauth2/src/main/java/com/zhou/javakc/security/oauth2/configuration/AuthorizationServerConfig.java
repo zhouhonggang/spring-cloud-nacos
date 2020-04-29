@@ -89,6 +89,9 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         clients.withClientDetails(jdbcClientDetailsService());
     }
 
+    @Autowired
+    private Auth2ResponseExceptionTranslator auth2ResponseExceptionTranslator;
+
     /**
      * 认证服务终端配置
      * 配置授权（authorization）及令牌（token）的访问端点和令牌服务(token services)
@@ -99,6 +102,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         endpoints
             .tokenServices(defaultTokenServices())
             .authenticationManager(authenticationManager)
+            .exceptionTranslator(auth2ResponseExceptionTranslator)
             .allowedTokenEndpointRequestMethods(HttpMethod.GET, HttpMethod.POST, HttpMethod.PUT, HttpMethod.DELETE);
     }
 
