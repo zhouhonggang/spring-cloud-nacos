@@ -7,9 +7,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
 import java.util.List;
 
 /**
@@ -53,15 +50,9 @@ public class User extends Base {
     private String email;
 
     /** 用户头像 */
-    @Lob
     @Column(name = "user_photo", updatable = false)
     @ApiModelProperty(value = "用户头像 | Record user photo")
-    private byte[] photo;
-
-    /** 头像临时传输 */
-    @Transient
-    @ApiModelProperty(value = "用户头像(缓存地址) | Record user photo name")
-    private String photoname;
+    private String photo;
 
     @ManyToMany
     @JoinTable(

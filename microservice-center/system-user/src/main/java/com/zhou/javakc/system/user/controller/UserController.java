@@ -7,6 +7,7 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.*;
@@ -29,6 +30,8 @@ import java.util.UUID;
 @Api(tags = "系统管理-人员管理-API接口")
 public class UserController {
 
+    @Value("${images.path}")
+    private String imagesPath;
     @Autowired
     private UserService userService;
 
@@ -57,15 +60,16 @@ public class UserController {
     @PostMapping("photo")
     public String photo(@RequestParam("photo") MultipartFile photo)
     {
-        String name = UUID.randomUUID().toString();
+        String name = photo.getOriginalFilename();
+        String uuid = UUID.randomUUID().toString();
+        String path = uuid + name.substring(name.lastIndexOf("."));
         try {
-            String path = ResourceUtils.getURL("classpath:").getPath();
-            File photoFile = new File(path + File.separator + name);
+            File photoFile = new File(imagesPath + path);
             photo.transferTo(photoFile);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return name;
+        return path;
     }
 
     @ApiOperation(value = "用户修改", notes = "请按照校验规则添加必填内容及相应格式!")

@@ -82,17 +82,6 @@ public class UserService extends BaseService<User, UserDao> {
     @Transactional(readOnly = false)
     public User save(User entity)
     {
-        // 解析上传的头像, 存入到数据库
-        String path = null;
-        try {
-            path = ResourceUtils.getURL("classpath:").getPath();
-            File file = new File(path + File.separator + entity.getPhotoname());
-            byte[] photo = FileCopyUtils.copyToByteArray(file);
-            entity.setPhoto(photo);
-            file.delete();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         // 密码加密后存入到数据库
         entity.setPassword( passwordEncoder.encode(entity.getPassword()) );
         return dao.save(entity);

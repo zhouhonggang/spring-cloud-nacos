@@ -14,6 +14,7 @@ spring:
     nacos:
       config:
         server-addr: ${nacos.address}
+        shared-dataids: spring-cloud-nacos.yaml
       discovery:
         server-addr: ${nacos.address}
     gateway:

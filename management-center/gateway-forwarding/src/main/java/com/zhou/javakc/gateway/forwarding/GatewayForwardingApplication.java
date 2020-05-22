@@ -5,10 +5,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerInterceptor;
-import org.springframework.cloud.gateway.route.RouteLocator;
-import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 
@@ -67,6 +67,18 @@ public class GatewayForwardingApplication {
         @GetMapping("/fallback")
         public Mono<String> fallback() {
             return Mono.just("非常抱歉, 服务器开了点小差导致无法访问, 请稍后重试!");
+        }
+    }
+
+    /**
+     * 配置主页面
+     */
+    @Controller
+    static class MainController {
+        @RequestMapping("/")
+        public String main()
+        {
+            return "index";
         }
     }
 
